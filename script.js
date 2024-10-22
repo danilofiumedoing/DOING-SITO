@@ -76,107 +76,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    const carouselTrack = document.querySelector('.carousel-track');
-    const carouselItems = document.querySelectorAll('.carousel-item2');
-    const prevButton = document.querySelector('.carousel-button.left');
-    const nextButton = document.querySelector('.carousel-button.right');
     
-    let currentIndex = 0;
-    const totalItems = carouselItems.length;
-    const visibleItems = 5; // 5 elementi visibili alla volta
-    const itemWidth = carouselItems[0].offsetWidth;
-    
-    function moveToIndex(index) {
-      carouselTrack.style.transform = `translateX(${-index * itemWidth}px)`;
-    }
-    
-    // Nuova funzione per scorrere senza tornare indietro
-    function nextSlide() {
-      currentIndex++;
-      if (currentIndex >= totalItems) {
-        // Quando si raggiunge la fine, riposiziona all'inizio senza l'effetto di ritorno
-        currentIndex = 0;
-        carouselTrack.style.transition = 'none'; // Disattiva la transizione
-        moveToIndex(currentIndex);
-        setTimeout(() => {
-          carouselTrack.style.transition = 'transform 0.5s ease'; // Riattiva la transizione
-          nextSlide(); // Riprendi a scorrere
-        }, 20); // Piccola attesa per il ripristino della transizione
-      } else {
-        carouselTrack.style.transition = 'transform 0.5s ease'; // Riattiva la transizione
-        moveToIndex(currentIndex);
-      }
-    }
-    
-    function prevSlide() {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = totalItems - 1; // Torna all'ultima immagine
-      }
-      moveToIndex(currentIndex);
-    }
-    
-    // Loop continuo: aggiungi duplicati alla fine del track
-    function duplicateItems() {
-      const firstItems = Array.from(carouselItems).slice(0, visibleItems);
-      firstItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        carouselTrack.appendChild(clone);
-      });
-    }
-    
-    duplicateItems(); // Duplicare gli elementi all'inizio
-    nextButton.addEventListener('click', nextSlide);
-    prevButton.addEventListener('click', prevSlide);
-    
-    // Funzione per il trascinamento
-    let isDragging = false;
-    let startX, currentTranslate = 0, prevTranslate = 0, animationID;
-    
-    carouselTrack.addEventListener('mousedown', startDrag);
-    carouselTrack.addEventListener('mousemove', drag);
-    carouselTrack.addEventListener('mouseup', endDrag);
-    carouselTrack.addEventListener('mouseleave', endDrag);
-    
-    function startDrag(e) {
-      isDragging = true;
-      startX = e.pageX;
-      animationID = requestAnimationFrame(animation);
-    }
-    
-    function drag(e) {
-      if (isDragging) {
-        currentTranslate = e.pageX - startX;
-        carouselTrack.style.transform = `translateX(${prevTranslate + currentTranslate}px)`;
-      }
-    }
-    
-    function endDrag() {
-      isDragging = false;
-      cancelAnimationFrame(animationID);
-      prevTranslate += currentTranslate;
-    
-      // Limitare il movimento del carosello
-      if (prevTranslate > 0) {
-        prevTranslate = 0;
-      } else if (prevTranslate < -(totalItems) * itemWidth) {
-        prevTranslate = -(totalItems) * itemWidth;
-      }
-    
-      carouselTrack.style.transform = `translateX(${prevTranslate}px)`;
-    }
-    
-    // Animazione fluida del trascinamento
-    function animation() {
-      if (isDragging) {
-        requestAnimationFrame(animation);
-      }
-    }
-    
-   
 
 
+
+
+  const images = [
+    'img/sfondodoing.jpg',
+    'img/sfondodoing2.jpg',
+    'img/sfondodoing3.jpg'
+  ];
+
+  let currentImageIndex = 0;
+  const serviceSection = document.getElementById('service1');
+
+  function changeBackground() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    
+    // Crea un nuovo elemento div che si sovrapporrà temporaneamente
+    const newBgDiv = document.createElement('div');
+    newBgDiv.style.position = 'absolute';
+    newBgDiv.style.top = 0;
+    newBgDiv.style.left = 0; // Posiziona al centro
+    newBgDiv.style.width = '100%';
+    newBgDiv.style.height = '100%';
+    newBgDiv.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+    newBgDiv.style.backgroundSize = 'cover';
+    newBgDiv.style.backgroundPosition = 'center';
+    newBgDiv.style.transition = 'transform 1.5s ease-in-out, opacity 1.5s ease-in-out';
+    newBgDiv.style.transform = 'scale(1.2)'; // Inizia con uno zoom out
+    newBgDiv.style.opacity = '0'; // Parte nascosto
+
+    // Aggiungiamo il filtro scuro al nuovo div
+    newBgDiv.style.backgroundColor = 'rgba(9, 2, 22, 0.85)';
+    newBgDiv.style.backgroundBlendMode = 'overlay';
+
+    serviceSection.appendChild(newBgDiv);
+
+    // Fai comparire l'immagine con un effetto di zoom-in
+    setTimeout(() => {
+      newBgDiv.style.transform = 'scale(1)'; // Zoom in
+      newBgDiv.style.opacity = '1'; // Mostra gradualmente l'immagine
+    }, 100);
+
+    // Rimuovi l'immagine precedente con uno zoom-out
+    const currentBgDiv = serviceSection.querySelector('.active-bg');
+    if (currentBgDiv) {
+      currentBgDiv.style.transform = 'scale(1.2)'; // Zoom out
+      currentBgDiv.style.opacity = '0'; // Nascondi gradualmente
+      setTimeout(() => {
+        serviceSection.removeChild(currentBgDiv); // Rimuovi l'elemento dopo l'animazione
+      }, 1500); // Deve corrispondere alla durata della transizione
+    }
+
+    // Aggiungi una classe per riconoscere lo sfondo attivo
+    newBgDiv.classList.add('active-bg');
+  }
+
+  // Cambia immagine ogni 4 secondi
+  setInterval(changeBackground, 6000);
     
 });
 

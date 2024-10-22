@@ -47,7 +47,7 @@ header {
     right: 0;
     background-color: var(--primocolore);
     padding: 20px;
-    z-index: 5000;
+    z-index: 100000;
     color: white;
     font-size: 1.1em;
 }
@@ -155,7 +155,7 @@ header div i {
     color: white;
     padding: 20px;
     transition: right 0.3s ease;
-    z-index: 9;
+    z-index: 10000;
     overflow-y: auto; /* Aggiungi questa riga */
 }
 
@@ -296,6 +296,10 @@ header div i {
   #service1{
     background: url('img/sfondodoing.jpg') no-repeat center center;
     background-size: cover;
+    background-position: right; /* Partenza da destra */
+    transition: background-position 1s ease-in-out; /* Animazione di 1 secondo */
+    position: relative;
+    overflow: hidden;
   }
 
   #service1::before {
@@ -462,6 +466,8 @@ header div i {
     font-size: 40px;
     text-align: left;
     padding: 1em;
+    
+   
 }
   .servicespecial .content {
     display: flex;
@@ -470,6 +476,7 @@ header div i {
     justify-content: center; /* Centra verticalmente */
     width: 100%;
     max-width: 1200px;
+    z-index: 1000;
   }
   
   .servicespecial .content a {
@@ -519,6 +526,87 @@ header div i {
     border-bottom: 2px solid white;
   } 
 
+
+
+  
+
+.servicespecial2{
+  position: static;
+  min-height: calc(100vh + 85px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* EFFETTO PARALLAX */
+  position: relative;
+  color: var(--primocolore);
+  font-size: 40px;
+  text-align: left;
+  padding: 1em;
+ 
+}
+.servicespecial2 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: start; /* Centra orizzontalmente */
+  justify-content: center; /* Centra verticalmente */
+  width: 100%;
+  max-width: 1200px;
+  
+}
+
+.servicespecial2 .content a {
+  margin-top: 0;
+}
+
+/* Titolo */
+.servicespecial2 h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin: 0;
+}
+.servicespecial2 > .content p{
+  margin-top: 0.6em;
+  font-size: 0.5em;
+  border-left: 2px solid var(--primocolore);
+  padding-left: 0.6em;
+  width: 100%;
+  margin-left: 5px ;
+  margin-bottom: 0;
+}
+
+.servicespecial2 > .content a{
+  text-decoration: none;
+  color: var(--primocolore);
+}
+
+.servicespecial2 span{
+  font-size: 0.4em;
+  padding-bottom: 0.3em;
+}
+
+/* Piccolo link sotto il titolo */
+.servicespecial2 a p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: var(--primocolore);
+}
+
+.servicespecial2 p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+.servicespecial2 a span:hover {
+  /* font-weight: bold; */
+  border-bottom: 2px solid var(--primocolore);
+} 
+
+
+
   /* Scroll Arrow */
 .scroll-arrow {
     position: absolute; /* Posizione assoluta */
@@ -530,6 +618,7 @@ header div i {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s; /* Effetto di transizione */
+    z-index: 1;
   }
   
   /* Effetto Hover sulla freccia */
@@ -556,6 +645,24 @@ header div i {
     color: var(--primocolore);
   }
 
+  .scroll-arrow-special2 {
+    position: absolute; /* Posizione assoluta */
+    bottom: 55px; /* Fissa la freccia in basso */
+    left: 50%; /* Centra orizzontalmente */
+    padding-bottom: 80px;
+    transform: translateX(-50%); /* Correggi il centro */
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Effetto di transizione */
+  }
+  
+  /* Effetto Hover sulla freccia */
+  .scroll-arrow-special2:hover {
+    /* bottom: 18px; Cambia colore al passaggio del mouse */
+    color: white;
+  }
+
   footer{
     background-color: var(--primocolore);
     padding: 1em;
@@ -576,78 +683,67 @@ header div i {
   
 
 
+.spaceteam{
+  background-color: var(--primocolore);
+  padding: 2em 0;
+  color: white;
+}
 
 
+.spaceteam .container .row .item{
+  margin: 1em 0;
+}
 
-  .carousel-container {
+  .content-img img {
+    width: 100%;
+    height: auto;
+    /* border-radius: 8px; Arrotonda i bordi dell'immagine */
+    transition: transform 0.3s ease;
+  }
+  
+  .content-text {
     position: relative;
-    width: 100%;
-    
-    height: 200px;
-    background-color: red; /* Background rosso per il carosello */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
-  
-  .carousel {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .carousel-item2 {
-    min-width: 20%; /* 5 elementi visibili */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none; 
-    -webkit-user-select: none;
-  }
-  
-  .carousel-item2 img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-  }
-  
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
+    background: url(img/sfondodoing.jpg);
+    background-size:cover; /* Colore di sfondo rosso */
+    color: white; /* Testo bianco */
+    text-align: center;
     padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+    /* border-radius: 0 0 8px 8px; Arrotonda solo i bordi inferiori */
   }
   
-  .left {
-    left: 0;
+
+  .content-text::before{
+    content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(9, 2, 22, 0.85); */
+  z-index: 0; /* Cambia il colore e l'opacità se vuoi */
   }
   
-  .right {
-    right: 0;
+  .content-text h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding-top: 10px;
+   
   }
+  
+  .content-text p {
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  
+  .content-img:hover img {
+    transform: scale(1.01); /* Effetto di zoom al passaggio del mouse */
+  }
+  
 
 
 
-
-
-
-
-
-
-
-
-
+  
 
   @supports (-webkit-overflow-scrolling: touch) {
     /* Disabilita l'effetto parallax su dispositivi iOS */
@@ -662,7 +758,7 @@ header div i {
 
 /* Responsive */
 @media (max-width: 991px) {
-    .service h1, .servicespecial h1, .service2 h1 {
+    .service h1, .servicespecial h1, .service2 h1, .servicespecial2 h1 {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 10px;
@@ -690,7 +786,7 @@ header div i {
       
       } 
 
-      .scroll-arrow-special {
+      .scroll-arrow-special, .scroll-arrow-special2 {
         position: absolute; /* Posizione assoluta */
         bottom: 5px; /* Fissa la freccia in basso */
         left: 50%; /* Centra orizzontalmente */
