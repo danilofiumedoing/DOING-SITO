@@ -34,6 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
+  const arrowsscroll = document.querySelectorAll(".partnerscroll");
+
+  arrowsscroll.forEach((arrow) => {
+    arrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = arrow.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+
+      // Scroll fluido
+      window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: "smooth",
+      });
+    });
+  });
+
+
+
+
 
   //codice per sidebar
 
@@ -135,7 +154,125 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Cambia immagine ogni 4 secondi
   setInterval(changeBackground, 6000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 });
 
 
+// script.js
+window.addEventListener('beforeunload', function() {
+  document.getElementById('loader').style.display = 'flex'; // Mostra il loader
+});
+
+
+
+
+
+
+// Funzione per l'animazione in uscita
+function fadeOutEffect(callback) {
+  document.body.classList.add('fade-out');
+  setTimeout(() => {
+      callback();
+  }, 500); // Tempo dell'animazione in uscita
+}
+
+// Funzione per l'animazione in entrata
+function fadeInEffect() {
+  // Rimuove la classe fade-out e aggiunge fade-in per mostrare il contenuto
+  document.body.classList.add('fade-in');
+}
+
+// Gestisci il caricamento iniziale della pagina
+window.addEventListener('load', () => {
+  fadeInEffect(); // Applicare l'effetto di fade-in quando la pagina è pronta
+});
+
+// Aggiungi animazioni per i link che portano ad altre pagine
+document.querySelectorAll('.link').forEach(link => {
+  link.addEventListener('click', function (event) {
+      event.preventDefault();
+      const url = this.href;
+      
+      fadeOutEffect(() => {
+          window.location.href = url; // Carica la nuova pagina
+      });
+  });
+});
+
+
+
+const carousel = document.getElementById('carousel8');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+carousel.addEventListener('mousedown', (e) => {
+    isDown = true;
+    carousel.classList.add('active');
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+});
+
+carousel.addEventListener('mouseleave', () => {
+    isDown = false;
+    carousel.classList.remove('active');
+});
+
+carousel.addEventListener('mouseup', () => {
+    isDown = false;
+    carousel.classList.remove('active');
+});
+
+carousel.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2; //scroll-fast
+    carousel.scrollLeft = scrollLeft - walk;
+});
+
+const carouselItems = document.querySelectorAll('.carousel-item8 img');
+
+// Disabilita il drag e la selezione delle immagini
+carouselItems.forEach(img => {
+  img.addEventListener('dragstart', (e) => e.preventDefault());
+  img.addEventListener('mousedown', (e) => e.preventDefault());
+  img.addEventListener('touchstart', (e) => e.preventDefault());
+});
+
+
+const carousel8 = document.getElementById('carousel8');
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+
+const scrollAmount = 200; // Quantità di pixel da scorrere
+
+leftArrow.addEventListener('click', () => {
+  carousel.scrollBy({
+    left: -scrollAmount,
+    behavior: 'smooth' // Scorrimento fluido
+  });
+});
+
+rightArrow.addEventListener('click', () => {
+  carousel.scrollBy({
+    left: scrollAmount,
+    behavior: 'smooth' // Scorrimento fluido
+  });
+});

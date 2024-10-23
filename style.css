@@ -26,11 +26,46 @@ body, html{
     max-width: 100%;
 }
 
+body.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Imposta l'opacità a 1 per le animazioni in uscita */
+body.fade-out {
+  opacity: 1;
+  animation: fadeOut 0.5s forwards;
+}
+
+/* Animazione di entrata */
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+  }
+}
+
+/* Animazione di uscita */
+@keyframes fadeOut {
+  to {
+      opacity: 0;
+  }
+}
+
+/* Assicura che il body abbia transizioni fluide */
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 .container{
     margin-top: 120px;
 }
 :root {
     --primocolore: rgb(9, 2, 22);
+    --giallo: #fbff74;
+    --verde:#00f587;
+    --azzurro: #0045ff;
+    --celestechiaro: #6b98f4;
 }
 
 .josefin-sans-font {
@@ -692,6 +727,10 @@ header div i {
 
 .spaceteam .container .row .item{
   margin: 1em 0;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  min-height: 80px; /* Forza ogni card ad occupare la stessa altezza */
 }
 
   .content-img img {
@@ -702,11 +741,12 @@ header div i {
   }
   
   .content-text {
+    flex-grow: 1;
     position: relative;
-    background: url(img/sfondodoing.jpg);
+    background: white;
     background-size:cover; /* Colore di sfondo rosso */
-    color: white; /* Testo bianco */
-    text-align: center;
+    color: var(--primocolore); /* Testo bianco */
+    text-align: left;
     padding: 10px;
     /* border-radius: 0 0 8px 8px; Arrotonda solo i bordi inferiori */
   }
@@ -731,14 +771,12 @@ header div i {
   }
   
   .content-text p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin: 0;
     padding-bottom: 10px;
   }
   
-  .content-img:hover img {
-    transform: scale(1.01); /* Effetto di zoom al passaggio del mouse */
-  }
+  
   
 
 
@@ -754,6 +792,29 @@ header div i {
   
     
   }
+
+
+
+
+  @media (max-width: 768px) {
+#mission .content .scroll-arrow{
+display: none;
+}
+
+.nonedis{
+  display: none;
+}
+
+.spaceteam .container .row .item{
+  
+  padding: 0 2em;
+  /* Forza ogni card ad occupare la stessa altezza */
+}
+  }
+
+
+
+
 
 
 /* Responsive */
@@ -811,4 +872,152 @@ header div i {
     .subcategories {
         display: block; /* Mostra le sottocategorie su schermi grandi */
     }
+}
+
+
+
+
+.carousel-container {
+  position: relative; /* Permette di posizionare le frecce sopra il carosello */
+  width: 100%; /* Larghezza del contenitore */
+  overflow: hidden;
+  background-color: var(--azzurro); /* Nasconde eventuali overflow del carosello */
+  display: flex;
+  justify-content: center;
+}
+
+.carousel8 {
+  display: flex;
+  overflow-x: auto; /* Abilita lo scorrimento orizzontale */
+  -webkit-overflow-scrolling: touch; /* Abilita lo scorrimento fluido su iOS */
+  width: 90%;
+  cursor: grab;
+  background-color: var(--azzurro);
+  height: 220px;
+  justify-content: flex-start;
+  align-items: center;
+
+  /* Nascondere la scrollbar */
+  scrollbar-width: none; /* Per Firefox */
+  -ms-overflow-style: none; /* Per Internet Explorer e Edge */
+}
+
+.carousel8::-webkit-scrollbar {
+  display: none; /* Per Chrome, Safari e Opera */
+}
+
+.carousel-item8 {
+  min-width: 180px;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item8 img {
+  max-width: 90%;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  touch-action: none; /* Disabilita l'interazione touch */
+}
+
+.carousel-arrow8 {
+  position: absolute;
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%);
+color: white;
+font-size: 1.5em;
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10; /* Assicurati che le frecce siano sopra il carosello */
+}
+
+.left-arrow {
+  left: 10px; /* Posizione a sinistra */
+}
+
+.right-arrow {
+  right: 10px; /* Posizione a destra */
+}
+
+
+.carousel-title {
+  position: absolute; /* Posiziona il titolo in modo assoluto */
+  top: 15px; /* Distanza dal bordo superiore */
+  left: 50%; /* Centra orizzontalmente */
+  transform: translateX(-50%); /* Centratura perfetta */
+  color: white; /* Colore del testo */
+  font-size: 1.7em; /* Dimensione del font */
+  z-index: 10; /* Assicurati che il titolo sia sopra gli altri elementi */
+  margin-bottom: 150em;
+}
+
+
+#partner .content {
+  padding-top: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Se vuoi centrare il contenuto verticalmente */
+}
+
+#partner .content .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Permette di andare a capo se ci sono troppe immagini */
+  margin: 0;
+  padding: 0;
+}
+
+#partner .content .row div {
+  text-align: center; /* Centra il testo sotto le immagini */
+}
+
+#partner .content .row div img {
+  width: 65%; /* Immagine riempie il contenitore */
+  height: auto; /* Mantiene le proporzioni */
+}
+
+
+
+@media (min-width: 991px) {
+  
+}
+
+
+
+
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Sfondo oscurato */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Assicura che il loader sia sopra gli altri contenuti */
+  display: none; /* Inizialmente nascosto */
+}
+
+.spinner {
+  border: 5px solid white; /* Colore di sfondo del loader */
+  border-top: 5px solid var(--primocolore); /* Colore del loader */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite; /* Animazione del loader */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
