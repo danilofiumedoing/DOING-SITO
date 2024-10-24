@@ -26,6 +26,14 @@ body, html{
     max-width: 100%;
 }
 
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+}
+
 body.fade-in {
   opacity: 0;
   animation: fadeIn 0.5s forwards;
