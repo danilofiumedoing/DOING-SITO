@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newBgDiv.style.opacity = '0'; // Parte nascosto
 
     // Aggiungiamo il filtro scuro al nuovo div
-    newBgDiv.style.backgroundColor = 'rgba(9, 2, 22, 0.85)';
+    newBgDiv.style.backgroundColor = 'rgba(9, 2, 22, 0.6)';
     newBgDiv.style.backgroundBlendMode = 'overlay';
 
     serviceSection.appendChild(newBgDiv);
