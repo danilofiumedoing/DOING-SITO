@@ -276,3 +276,14 @@ rightArrow.addEventListener('click', () => {
     behavior: 'smooth' // Scorrimento fluido
   });
 });
+
+
+
+
+
+
+
+
+
+
+
