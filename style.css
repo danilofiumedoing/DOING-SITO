@@ -68,6 +68,15 @@ body {
 .container{
     margin-top: 120px;
 }
+
+.overicon{
+  font-size: 25px;
+  color: var(--primocolore);
+}
+
+.overicon:hover{
+  color: #0045ff;
+}
 :root {
     --primocolore: rgb(9, 2, 22);
     --giallo: #fbff74;
@@ -757,7 +766,11 @@ header div i {
     border-bottom: 2px solid var(--primocolore);
   }
   
-  
+  .limited-width {
+    max-width: 600px; /* Per mantenere una larghezza fluida */
+    width: 100%; /* Imposta una larghezza uniforme */
+    
+  }
 
 
 .spaceteam{
@@ -820,7 +833,6 @@ header div i {
   
   
   
-
 
 
   

@@ -277,13 +277,8 @@ rightArrow.addEventListener('click', () => {
   });
 });
 
-
-
-
-
-
-
-
-
-
+function clearForm() {
+  // Resetta il modulo
+  document.getElementById('myForm').reset();
+}
 
