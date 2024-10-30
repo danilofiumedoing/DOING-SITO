@@ -175,9 +175,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // script.js
-window.addEventListener('beforeunload', function() {
-  document.getElementById('loader').style.display = 'flex'; // Mostra il loader
-});
+// Mostra il loader prima che la pagina inizi a ricaricarsi o cambi
+let loaderTimeout;
+
+// Funzione per mostrare il loader con un ritardo
+function showLoaderWithDelay() {
+  loaderTimeout = setTimeout(function() {
+    document.getElementById('loader').style.display = 'flex';
+  }, 1000); // Ritardo di 1 secondo
+}
+
+// Funzione per nascondere il loader e cancellare il timeout
+function hideLoader() {
+  clearTimeout(loaderTimeout);
+  document.getElementById('loader').style.display = 'none';
+}
+
+// Mostra il loader con ritardo prima del caricamento della nuova pagina
+window.addEventListener('beforeunload', showLoaderWithDelay);
+
+// Nasconde il loader quando la pagina è completamente caricata
+window.addEventListener('load', hideLoader);
 
 
 

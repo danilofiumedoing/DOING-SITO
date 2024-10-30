@@ -1045,7 +1045,10 @@ font-size: 1.5em;
 }
 
 
-
+#loader {
+  display: none;
+  /* Altri stili del loader */
+}
 
 
 .loader {
